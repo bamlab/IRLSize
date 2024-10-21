@@ -111,6 +111,14 @@ void IRLRawDimensionsSwap(IRLRawDimensions *dimensions) {
     IRLRawDimensions size = { 0.0f, 0.0f };
     
     switch ([UIDevice.currentDevice orchardiOSDevice]) {
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone16ProMax)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone16Pro)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone16Plus)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone16)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone15ProMax)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone15Pro)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone15Plus)
+        IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone15)
         IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone14ProMax)
         IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone14Pro)
         IRL_KNOWN_DEVICE_DIMENSIONS_MATCHING(OrchardiOSDevice, iPhone14Plus)

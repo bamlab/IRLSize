@@ -149,6 +149,38 @@ static const IRLRawMillimeters kiPhone14ProScreenWidth  =  65.08;
 static const IRLRawMillimeters kiPhone14ProMaxScreenHeight = 154.34;
 static const IRLRawMillimeters kiPhone14ProMaxScreenWidth  =  71.21;
 
+// iPhone 15
+static const IRLRawMillimeters kiPhone15ScreenHeight = 141.09;
+static const IRLRawMillimeters kiPhone15ScreenWidth  =  65.08;
+
+// iPhone 15 Plus
+static const IRLRawMillimeters kiPhone15PlusScreenHeight = 154.34;
+static const IRLRawMillimeters kiPhone15PlusScreenWidth  =  71.21;
+
+// iPhone 15 Pro
+static const IRLRawMillimeters kiPhone15ProScreenHeight = 141.09;
+static const IRLRawMillimeters kiPhone15ProScreenWidth  =  65.08;
+
+// iPhone 15 Pro Max
+static const IRLRawMillimeters kiPhone15ProMaxScreenHeight = 154.34;
+static const IRLRawMillimeters kiPhone15ProMaxScreenWidth  =  71.21;
+
+// iPhone 16
+static const IRLRawMillimeters kiPhone16ScreenHeight = 141.09;
+static const IRLRawMillimeters kiPhone16ScreenWidth  =  65.08;
+
+// iPhone 16 Plus
+static const IRLRawMillimeters kiPhone16PlusScreenHeight = 154.34;
+static const IRLRawMillimeters kiPhone16PlusScreenWidth  =  71.21;
+
+// iPhone 16 Pro
+static const IRLRawMillimeters kiPhone16ProScreenHeight = 144.79;
+static const IRLRawMillimeters kiPhone16ProScreenWidth  =  66.57;
+
+// iPhone 16 Pro Max
+static const IRLRawMillimeters kiPhone16ProMaxScreenHeight = 158.31;
+static const IRLRawMillimeters kiPhone16ProMaxScreenWidth  =  72.86;
+
 ///////////
 // iPads //
 ///////////
