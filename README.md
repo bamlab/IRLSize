@@ -1,130 +1,51 @@
 # IRLSize
 
-[![Version](https://img.shields.io/cocoapods/v/IRLSize.svg?style=flat)](https://cocoapods.org/pods/IRLSize)
-[![License](https://img.shields.io/cocoapods/l/IRLSize.svg?style=flat)](https://github.com/detroit-labs/IRLSize/blob/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/IRLSize.svg?style=flat)](https://github.com/detroit-labs/IRLSize)
+IRLSize is an iOS library in Objective-C for converting physical measurements (in millimeters) to device-specific density-independent pixels (dp) for Swift applications. The library includes properties for retrieving the physical dimensions of a device’s screen and a utility method to convert millimeter sizes to dp without needing a Swift bridge.
 
-## Getting Started
+## Features
 
-To run the example project, clone the repo and navigate to its root folder in
-Terminal. Run the following command to install dependencies in their proper
-location:
-
-```Bash
-pod install --project-directory=Example
-```
-
-## Use
-
-All IRLSize methods have two versions: one that uses `NSMeasurement` (`Measurement` in Swift), and one that uses the `IRLRawMillimeters` type (a `double` measuring millimeters).
-
-### Important: Upgrading to IRLSize 2.0
-
-IRLSize 2.0 switched the native unit for measurements from meters to millimeters to better manage what official Apple documentation there is on device sizes. This is a breaking change and as such the raw unit type changed from `IRLRawLengthMeasurement` to `IRLRawMillimeters` to avoid this change accidentally changing existing code by a factor of 1,000. If you were using `NSMeasurement`, no updates should be necessary, as it automatically converts between units.
-
-### Measuring an On-Screen Element
-
-To find out the dimensions of a `UIView` in an iOS app, use one of the following
-properties:
-
-#### Objective-C
-```Objective-C
-// NSMeasurement Version
-NSMeasurement<NSUnitLength *> *width = view.irl_physicalWidth;
-NSMeasurement<NSUnitLength *> *height = view.irl_physicalHeight;
-
-// Raw Version
-//   `IRLRawMillimeters` is a `double` representing millimeters. 
-IRLRawMillimeters rawWidth = view.irl_rawPhysicalWidth;
-IRLRawMillimeters rawHeight = view.irl_rawPhysicalHeight;
-```
-
-If a view is on a secondary screen (i.e. if you’re using an external display)
-the measurements will be returned as `nil`.
-
-Of course, this also works nicely in Swift:
-
-#### Swift
-```Swift
-// Measurement Version
-let width = view.physicalWidth // type: Measurement<UnitLength>
-let height = view.physicalHeight // type: Measurement<UnitLength>
-
-// Raw Version
-let rawWidth = view.rawPhysicalWidth // type: IRLRawMillimeters
-let rawHeight = view.rawPhysicalHeight // type: IRLRawMillimeters
-```
-
-### Sizing a View
-
-If you want to ensure that a view matches a certain physical size, IRLSize provides
-transforms to help you out:
-
-#### Objective-C
-```Objective-C
-// NSMeasurement Version
-NSMeasurement<NSUnitLength *> *desiredHeight =
-[[NSMeasurement alloc] initWithDoubleValue:38.0
-                                      unit:NSUnitLength.millimeters];
-
-view.transform = [view irl_transformForPhysicalHeight:desiredHeight];
-
-// Raw Version
-view.transform = [view irl_transformForRawPhysicalHeight:38.0];
-```
-
-#### Swift
-```Swift
-// Measurement Version
-let desiredHeight = Measurement(value: 38, unit: UnitLength.millimeters)
-
-view.transform = view.transform(forPhysicalHeight:desiredHeight)
-
-// Raw Version
-view.transform = view.transform(forRawPhysicalHeight:38);
-```
-
-### Measuring a Device
-
-If you just want to know the physical size of the screen, use the category on
-`UIDevice` for iOS or `WKInterfaceDevice` for watchOS:
-
-#### Objective-C
-```Objective-C
-// iOS
-NSMeasurement<NSUnitLength *> *screenHeight = UIDevice.currentDevice.irl_physicalScreenHeight;
-IRLRawMillimeters rawScreenHeight = UIDevice.currentDevice.irl_rawPhysicalScreenHeight;
-
-// watchOS
-NSMeasurement<NSUnitLength *> *screenHeight = WKInterfaceDevice.currentDevice.irl_physicalScreenHeight;
-IRLRawMillimeters rawScreenHeight = WKInterfaceDevice.currentDevice.irl_rawPhysicalScreenHeight;
-```
-
-#### Swift
-```Swift
-// iOS
-let screenHeight = UIDevice.current.physicalScreenHeight
-let rawScreenHeight = UIDevice.current.rawPhysicalScreenHeight
-
-// watchOS
-let screenHeight = WKInterfaceDevice.current.phsyicalScreenHeight
-let rawScreenHeight = WKInterfaceDevice.current.rawPhysicalScreenHeight
-```
+- Retrieve physical screen height and width in millimeters for supported iOS devices.
+- Convert millimeter values to dp accurately based on device-specific measurements.
+- Fallback handling for unsupported devices.
 
 ## Installation
 
-IRLSize is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```Ruby
-pod "IRLSize"
+### Using CocoaPods
+Add IRLSize to your Podfile:
+```ruby
+pod 'IRLSize', :git => 'https://github.com/bamlab/IRLSize', :branch => 'main'
 ```
 
-## Author
+## Usage
 
-Jeff Kelley (SlaunchaMan@gmail.com) at [Detroit Labs](https://detroitlabs.com).
+### Swift Integration
 
-## License
+To use IRLSize in Swift:
 
-IRLSize is available under the MIT license. See the LICENSE file for more info.
+1. Import the module.
+2. IRLDeviceMeasurements.
+3. Access properties and call methods directly.
 
+Example:
+```swift
+import IRLSize
+
+let deviceMeasurements = IRLDeviceMeasurements()
+let heightInMm = deviceMeasurements.rawPhysicalScreenHeight
+let widthInMm = deviceMeasurements.rawPhysicalScreenWidth
+let sizeInDp = deviceMeasurements.convertMmSize(toDp: 20) // Convert 20 mm to dp
+```
+
+## Supported Devices
+
+IRLSize includes predefined physical dimensions for popular iOS devices. For unsupported devices, the library defaults to the dimensions of an iPhone 11.
+
+If you need to add support for additional devices, refer to [Apple’s Accessory Design Guidelines](https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf) to obtain accurate measurements (find in the table of content the device, look at the schema's and the size is the display active area).
+
+## Contributing
+
+Contributions to expand device support or improve conversion accuracy are welcome! Please submit a pull request.
+
+## Historic
+
+This was a fork from https://github.com/detroit-labs/IRLSize however it is not maintained anymore and could not be simply patch. This is why it has been forked and rework to just compute the size.
