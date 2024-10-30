@@ -1,32 +1,13 @@
-//
-//  IRLSize.h
-//  IRLSize
-//
-//  Created by Jeff Kelley on 11/13/2014.
-//  Copyright © 2019 Detroit Labs. All rights reserved.
-//
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-#import <TargetConditionals.h>
+typedef int IRLRawMillimeters;
 
-#if TARGET_OS_IOS
-    #define IRL_IOS_AVAILABLE(v) __attribute__((availability(ios,introduced=v)))
-#elif TARGET_OS_WATCH
-    #define IRL_WATCHOS_AVAILABLE(v) __attribute__((availability(watchos,introduced=v)))
-#endif
+@interface IRLDeviceMeasurements : NSObject
 
-typedef double IRLRawMillimeters;
+@property (nonatomic, readonly) IRLRawMillimeters irl_rawPhysicalScreenHeight NS_SWIFT_NAME(rawPhysicalScreenHeight);
+@property (nonatomic, readonly) IRLRawMillimeters irl_rawPhysicalScreenWidth NS_SWIFT_NAME(rawPhysicalScreenWidth);
 
-typedef struct {
-    IRLRawMillimeters width;
-    IRLRawMillimeters height;
-} IRLRawDimensions;
+- (NSInteger)convertMmSizeToDp:(NSInteger)sizeInMm;
 
-#define IRL_SIZE_UNIT NSUnitLength.millimeters
-
-#if TARGET_OS_IOS
-    #import <IRLSize/UIDevice+IRLSize.h>
-    #import <IRLSize/UIView+IRLSize.h>
-#elif TARGET_OS_WATCH
-    #import <IRLSize/WKInterfaceDevice+IRLSize.h>
-    #import <IRLSize/WKInterfaceObject+IRLSize.h>
-#endif
+@end
